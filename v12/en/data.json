@@ -1,0 +1,288 @@
+{
+    "version": "0.1",
+    "pageContent": 
+	{
+        "_comments": "object that contains data for page labels, buttons, etc.",
+        "navItems": 
+		{
+            "_common": 
+			{
+                "buttonBackToGallery": 
+				{
+                    "name": "Back To Gallery",
+					"method": "backToGallery()",
+					"idName": "backToGallery"	
+                },
+                "buttonStartTutorial": 
+				{
+                    "name": "Start Tutorial",
+					"method": "startTutorialFromDetailsScreen()",
+					"idName": "startTutorial"
+                },
+				"buttonViewDetails": 
+				{
+                    "name": "View Details",
+					"method": "viewDetails()",
+					"idName": "stepsViewDetails"	
+                }
+            }
+        }
+    },
+    "tutorial": 
+	{
+        "_common": 
+		{
+            "name": "Unit Testing - Generating test data and unit tests from the ACE runtime",
+            "shortDescription": "Learn how to record messages passing through the runtime, and use them to automate the generation of large volumes of unit tests.",
+            "durationText": "This tutorial takes approximately",
+            "durationTime": "10 minutes",
+            "_resourceToOpenComment": "The ID of the first resource to open when the user imports the tutorial. Resource IDs are defined in the repo_metadata.json Tutorials listing on ot4i.",
+            "resourceToOpen": "ExampleRouterFlow",
+            "helpLink": 
+			{
+                "text": "IBM Knowledge Center",
+           		"link": "https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.ace.home.doc/help_home.htm"
+            }
+        },
+        "pageDetails": 
+		{
+            "topicsName": "Tutorial topics",
+            "_topicListComment": "A short list of product concepts or tasks demonstrated by this tutorial",
+            "topicList": 
+			[
+                {
+                    "title": "Java Unit Testing"
+                },
+                {
+                    "title": "Command: ibmint generate tests"
+                }				
+            ],
+            "outcomesName": "Learning outcomes",
+            "_outcomesComment": "A description of what the user will have learned or accomplished by running this tutorial.",
+            "outcomeList": 
+			[
+                {
+                    "title": "As part of an automated process, use IBM App Connect Enterprise to record message assembly files which represent the in-memory logical tree used as messages travel through a deployed message flow."
+                },
+				{
+                    "title": "Execute the ibmint generate tests command to use the recorded messages for the automated construction of Java unit tests."
+                }
+            ],
+            "summary": 
+			{
+                "overviewName": "Overview",
+                "_overviewComment": "A short description of what happens in this tutorial, and an optional short explanation of the ACE concepts used in this tutorial if necessary for context. What background knowledge must the user have for this to make sense?",
+                "sections": 
+				[
+					 {
+                        "section": "THIS TUTORIAL IS WORK IN PROGRESS SO MAY NOT YET WORK! This tutorial provides a simple message flow in an application that receives a JSON input message over HTTP and then routes the data (using a Route node) and transforms the data (using a graphical mapping node) before responding to the requesting client with an HTTPReply node. Three input messages are provided, each containing different data causing the messages to pass through different flow paths."
+					 },
+					 {
+                        "section": "The tutorial provides the message flow already constructed, describes how to configure an integration server to record message assembly files, and then uses the Toolkit's Flow Exerciser to pass multiple messages through the flow. The captured message assembly files are used to generate unit tests for the flow using the <code>ibmint generate tests</code> command. Finally, the tutorial describes how to import the resulting unit tests back into the Toolkit, from where they are executed."					
+					 }
+                ]
+            },
+			"helpLinks": 
+			{
+				"_helpLinksComment": "Helplinks that have a type:web attribute are rendered as web links. Otherwise, links are assumed to be to embedded Help topics in the Knowledge Center.",
+				"title": "Find out more",
+				"details": 
+				[
+					{
+						"title": "Knowledge Center link to ",
+						"description": "Developing unit tests using Test Projects",
+						"link": "https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bi12002_.htm",
+						"type": "web"
+					},
+					{					
+						"title": "Knowledge Center link to ",
+						"description": "Developing unit tests using the command: ibmint generate tests",
+						"link": "https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bi12002_.htm",
+						"type": "web"
+					}
+				]
+			}
+        },
+        "pageSteps": 
+		{
+            "create": 
+			{
+                "overview": 
+				{
+                    "name": "Create",
+                    "heading": "Import a project",
+                    "_createComment": "A description of what will happen when the user clicks Import.",
+                    "sections": 
+					[
+                        {
+                            "section": "Click <span class='uicontrol'>Import</span> and the application named <span class='application'>ExampleRouterApp</span> will be added to your workspace."
+						},
+						{
+							"section": "<span class='application'>ExampleRouterApp</span> provides a single message flow named <span class='resource'>ExampleRouterFlow</span> which receives data over HTTP."													
+						},
+						{
+							"section": "The HTTPInput node is configured to expect a JSON message. The next node in the flow is a Route node, which routes messages based upon the value they carry in the Country data field - either GB, US or DE. Each message is then transformed using a graphical mapping node. The HTTPReply node at the end of the flow returns the JSON to the requester."
+						},
+						{				
+						 	"section": "From the Integration Explorer view in the bottom left corner of the Toolkit, right-click the Integration Servers folder and select the option to <span class='uicontrol'>Create a local integration server</span>. Leave all the options with their default values and click Finish. The local Integration Server will be started, using a project in your Toolkit's workspace as the work directory. Click OK to dismiss the Success dialog."
+						},						
+						{
+							"section":"Now move to the Prepare section where we will send data through the flow, and use this to generate some unit tests."
+						 }
+					 ]
+				 },
+                "helpLinks": 
+				{
+                    "title": "Find out more",
+                    "details": 
+					[
+                        {
+                            "title": "Knowledge Center link to ",
+                            "description": "Developing integration solutions by using applications",
+                            "link": "https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bi12002_.htm",
+							"type": "web"
+                        }
+                    ]
+                },
+                "actions": 
+				{
+                    "title": "Create Actions",
+                    "details": 
+					[
+                        {
+                            "name": "Import",
+                            "method": "importArtifacts()"
+                        }
+                    ]
+                }
+            },
+            "prepare": 
+			{
+                "overview": 
+				{
+                    "name": "Prepare",
+                    "heading": "",
+                    "_prepareComment": "A description of what just happened when the user clicked Import, and what will happen when the user clicks Deploy.",
+                    "sections": 
+		     [				 
+				  {
+                "section":"<b>Configure the integration server to record message assembly files for all messages going through the message flow</b>",
+                "steps":{
+                  "type":"ordered",
+                  "details":[
+                    {
+                      "details":"In the last instruction you created an integration server named <span class='application'>TEST_SERVER</span>. Locate the project in your Toolkit workspace which has this name (you will find it in the section labelled <span class='application'>Independent Resources</span>). This project represents the integration server's working directory that has inside it all of its configuration files. Right-click the <span class='application'>server.conf.yaml</span> file and select <span class='application'>Open with text editor</span>. Find the section shown below, uncomment the entries and specify a <span class='application'>recordedMessagePath</span> of your choice where the server will record message assembly files and enable recording by settng <span class='application'>recordAllMessages</span> to <span class='application'>true</span>:<br><code>RecordedMessageManager:&nbsp;<br>&nbsp;&nbsp;recordedMessagePath: 'C:\temp\demo'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Set the directory to store recorded messages<br>&nbsp;&nbsp;recordAllMessages: true&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Set to 'true' to enabling recording of messages from all message flows</code><br> Save and close the file."
+					},
+					{
+						"details": "The integration server will need to be restarted to pick up the edits which were just made to its configuration. From the Integration Explorer view in the bottom left corner of the Toolkit, right-click <span class='application'>TEST_SERVERr</span> and select the option to <span class='uicontrol'>Stop</span>. Once the server has stopped, right-click it again and select the option to <span class='uicontrol'>Start</span>."						
+                    }
+				  ]
+				}
+				  },				
+				 {
+                "section":"<b>Testing using the Flow Exerciser</b>",
+                "steps":{
+                  "type":"ordered",
+                  "details":[
+                    {
+                      "details":"Open <span class='application'>ExampleRouterFlow</span> and at the top of the flow canvas, click the Flow Exerciser icon <img src='https://ot4i.github.io/iib-tutorials/images/icons/iib/startFlowExerciser.png' alt='' />. If prompted (which you will be if your Toolkit has known connections to more than one server), select the <span class='application'>TEST_SERVER</span> integration server and agree to the confirmation dialog which warns that the message flow is owned by an Application. After a few seconds another confirmation dialog will appear with a Ready to record message status. Read through the information on the dialog and click Close."
+                    },
+                    {
+                      "details":"Back at the top of the flow, click on the Send Message icon <img src='https://ot4i.github.io/iib-tutorials/images/icons/iib/sendMessage.png' alt='' /> and when the dialog opens, select the first provided input message named <span class='application'>InputMessageJoeBloggs</span>:<br><code>{\"FirstName\": \"Joe\", \"LastName\": \"Bloggs\", \"Country\": \"GB\"}</code><br>Click Send to push the data into the flow. You should receive a reply message from the flow that looks like this:<br><code>{\"Message\":\"Joe Bloggs lives in Great Britain\"}</code><br>Click close on the testing dialog"
+                    },
+					{
+                      "details":"We will now run a second message through the flow. Click on the Send Message icon <img src='https://ot4i.github.io/iib-tutorials/images/icons/iib/sendMessage.png' alt='' /> and when the dialog opens, select the second provided input message named <span class='application'>InputMessageJohnDoe</span>:<br><code>{\"FirstName\": \"John\", \"LastName\": \"Doe\", \"Country\": \"US\"}</code><br>Click Send to push the data into the flow. You should receive a reply message from the flow that looks like this:<br><code>{\"Message\":\"John Doe lives in the United States of America\"}</code><br>Click close on the testing dialog"
+                    },
+					{
+                      "details":"We will now run a third message through the flow. Click on the Send Message icon <img src='https://ot4i.github.io/iib-tutorials/images/icons/iib/sendMessage.png' alt='' /> and when the dialog opens, select the third provided input message named <span class='application'>InputMessageOttoNormalverbraucher</span>:<br><code>{\"FirstName\": \"Otto\", \"LastName\": \"Normalverbraucher\", \"Country\": \"DE\"}</code><br>Click Send to push the data into the flow. You should receive a reply message from the flow that looks like this:<br><code>{\"Message\":\"Otto Normalverbraucher lives in Deutschland\"}</code><br>Click close on the testing dialog"
+                    }					
+                  ]
+                }
+              },
+			  {
+              "section":"<b>Creating the Test Case</b>",				
+                "steps":
+                {
+                "type":"ordered",
+                "details":
+                  [                    					
+					{ 
+                      "details":"With the flow still showing in recording mode, right-click the node in the message flow named <span class='application'>Mapping</span> and choose the menu option to <span class='application'>Create Test Case</span>. The Create test case wizard will launch. Note that the Node location fields will already have been populated with the name of the Application, Flow, Node, Input terminal and Output terminal."
+					},
+					{ 
+                      "details":"In the section labelled <span class='application'>Generated input file for constructing an input message assembly to invoke the node</span>, you will see that the recorded input message will be used when the test is generated. If you had more than one recorded message you could choose which one to use."
+                    },					
+					{ 
+                      "details":"In the section labelled <span class='application'>Generated output file to compare against the actual output message</span>, you will see that the recorded output message will be used when the test is generated."
+                    },
+					{ 
+                      "details":"In the section labelled <span class='application'>Select matchers to be included in the generated test</span>, options are ticked for <span class='application'>Assert node call count</span> and <span class='application'>Assert terminal propagate count</span>.In the section labelled <span class='application'>Select message trees to compare in the generated test</span>, the <span class='application'>Message body</span> will have been selected. You can scroll through the preview pane to see what the generated unit test will look like. The preview is updated when you change the selected options on the left, but for this tutorial leave everything as the defaults, and click the <span class='Application'>Finish</span> button to generate the test."
+                    },
+					{ 
+                      "details":"You will find that a Test Project named <span class='application'>MyApplication_IntegrationTest</span> is generated for you. The generated java unit test is opened for you (you can also find it in <span class='application'>MyApplication_MyMessageFlow_Mapping_0001_IntegrationTest.java</span>). The project has a resources folder where your input and output data files will have been created. The generated Test Project has a project reference configured which points the Test Project at the application <span class='application'>MyApplication</span>. In the next section we will describe how to run the unit test you have just created."
+                    }
+                  ]
+                }
+              }
+             ]
+                },
+                "helpLinks": 
+				{
+                }
+            },
+            "run": 
+			{
+                "overview": 
+				{
+                    "name": "Run",
+                    "heading": "",
+                    "_runComment": "The full steps for the user to run through the tutorial. Use 'sections' to render paragraphs, 'steps' with a type of 'ordered' or 'unordered' to render HTML lists, and 'substeps' to render nested lists.",
+                "sections":[                            
+                            {
+                                "section": "<h4>Generate the Unit Tests",
+                                "steps": {
+                                    "type": "ordered",
+                                    "details": [                                      
+                                    	{
+                                        "details": "Navigate to the directory location which you configured earlier in the tutorial in the server.conf.yaml for capturing recorded messages. The example given used <span class='Application'>C:\temp\demo</span>. You will find a subdirectory named after the application, and inside that a subdirectory named after the message flow. This should contain nine message assembly files have been recorded. There will be a separate file for each message which passed along each wire in the flow. We used three input messages, and each flow run traversed three wires between message flow nodes. For example, the message assembly files will be named a bit like this:<br><code>C:\temp\demo\ExampleRouterApp\ExampleRouterFlow\0000BD9C-608F06A0-00000002-0.mxml<br>C:\temp\demo\ExampleRouterApp\ExampleRouterFlow\0000BD9C-608F0525-00000001-0.mxml<br>C:\temp\demo\ExampleRouterApp\ExampleRouterFlow\0000BD9C-608F0525-00000001-1.mxml<br>C:\temp\demo\ExampleRouterApp\ExampleRouterFlow\0000BD9C-608F0525-00000001-2.mxml<br>C:\temp\demo\ExampleRouterApp\ExampleRouterFlow\0000BD9C-608F06A0-00000002-0.mxml<br>C:\temp\demo\ExampleRouterApp\ExampleRouterFlow\0000BD9C-608F06A0-00000002-1.mxml<br>C:\temp\demo\ExampleRouterApp\ExampleRouterFlow\0000BD9C-608F06A0-00000002-2.mxml<br>C:\temp\demo\ExampleRouterApp\ExampleRouterFlow\0000BD9C-608F071E-00000003-0.mxml<br>C:\temp\demo\ExampleRouterApp\ExampleRouterFlow\0000BD9C-608F071E-00000003-1.mxml<br>C:\temp\demo\ExampleRouterApp\ExampleRouterFlow\0000BD9C-608F071E-00000003-2.mxml</code>"
+                                        },
+										{
+                                        "details": "Open a <span class='Application'>Command console</span> and execute the following command, which will generate unit tests based upon the recorded message assembly files.<br><code>mqsigeneratetests --recorded-messages C:\temp\demo --output C:\temp\demo\Test_ExampleRouterApp --java-class com.ibm.dev.MyTests<br>BIP15183I: Successfully generated test-suite containing '6' test-cases and written it to 'C:\temp\demo\Test_ExampleRouterApp'.<br>BIP8071I: Successful command completion.</code>"
+                                        },
+										{
+                                        "details": "Return to the Toolkit, and from the menu File > Import, expand the IBM Integration section and select the option to Import generated test files into a Test Project."
+                                        },										
+										{
+										"details": "Right click the Test Project named <span class='Application'>MyApplication_IntegrationTest</span> and choose the option  <span class='Application'>Run as &gt; Integration Server JUnit Test Runner</span>."
+										},
+										{
+										"details": "After a few seconds, the Console view should be opened, which will show an independent integration server  being started in order to execute the unit test. There is no deployment step required - This is taken care of for you so that the application under test, and the Test Project which we just created are automatically available to the server."	
+										},
+										{
+										"details": "The JUnit view will open in the top left corner (just to the right of the Application Development view and the Patterns Explorer) and will show that the test which was generated ran successfully and passed."
+										}
+                                      ]
+                                  }                            
+                        },			
+						{
+			    			"section": "This tutorial has shown how to record messages passing through the runtime, and use them to automate the generation of large volumes of unit tests."
+						}
+                    ]
+                },
+                "helpLinks": 
+				{
+                    "title": "Find out more",
+                    "details": 
+					[                        
+                        {
+                            "title": "Knowledge Center link to ",
+                            "description": "Unit Testing your message flow",
+                            "link": "https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/rt26110_.htm",
+							"type": "web"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
